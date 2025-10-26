@@ -72,9 +72,8 @@ def preprocessing(df):
     def clean_revenue_data(val):
         if pd.isna(val):
             return None
-    
-        s = str(val).replace('€', '').replace(',', '').strip()  # remove € and commas
-    
+        s = str(val).replace('€', '').
+                     replace(',', '').strip()  # remove € and commas
         multiplier = 1
         if s.upper().endswith('B'):
             multiplier = 1e9
@@ -82,7 +81,6 @@ def preprocessing(df):
         elif s.upper().endswith('M'):
             multiplier = 1e6
             s = s[:-1]
-    
         try:
             return float(s) * multiplier
         except ValueError:
@@ -90,8 +88,10 @@ def preprocessing(df):
 
     df['revenue'] = df['revenue'].apply(clean_revenue_data)
 
-    df['company_size']=pd.to_numeric(df['company_size'].astype(str).str.replace(',', ''), errors ='coerce')
-
+    df['company_size'] = pd.to_numeric(df['company_size'].
+                                       astype(str).
+                                       str.replace(',', ''),
+                                       errors='coerce')
     df = df.dropna()
     
     df.head()
