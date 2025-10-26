@@ -7,12 +7,9 @@ You should NOT change any function, file or variable names,
 Make use of the functions presented in the lectures
 and ensure your code is PEP-8 compliant, including docstrings.
 """
-from corner import corner
+
 import matplotlib.pyplot as plt
-import numpy as np
 import pandas as pd
-import scipy.stats as ss
-import seaborn as sns
 
 
 def plot_relational_plot(df):
