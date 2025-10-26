@@ -16,7 +16,7 @@ import seaborn as sns
 
 
 def plot_relational_plot(df):
-    fig, ax = plt.subplots(1,1, dpi = 1000)
+    fig,ax = plt.subplots(1,1,dpi=1000)
     x = df.iloc[:,0]
     y = df.iloc[:,1]/1000000000
     ax.scatter(x, y)
@@ -30,22 +30,22 @@ def plot_relational_plot(df):
 
 
 def plot_categorical_plot(df):
-    fig, ax = plt.subplots(dpi = 1000)
+    fig,ax = plt.subplots(dpi=1000)
     counts = df.iloc[:,2].value_counts()
-    ax.pie(counts, autopct='%1.1f%%', labels = counts.index)
+    ax.pie(counts,autopct='%1.1f%%',labels = counts.index)
     ax.set_title('Seniority Distribution in Job Listings')
     plt.savefig('categorical_plot.png')
     return
 
 
 def plot_statistical_plot(df):
-    fig, ax = plt.subplots(1,2, dpi = 1000)
-    (df.iloc[:,0]/100000).plot.box(ax = ax[0], grid =False)
+    fig,ax = plt.subplots(1,2,dpi=1000)
+    (df.iloc[:,0]/100000).plot.box(ax=ax[0],grid=False)
     ax[0].set_xlabel('Company Size')
     ax[0].set_ylabel('Number of Employees (100,000)')
     ax[0].set_xticklabels([])
 
-    (df.iloc[:,1]/1000000000).plot.box(ax = ax[1], grid =False)
+    (df.iloc[:,1]/1000000000).plot.box(ax=ax[1],grid=False)
     ax[1].set_ylabel('€Billion')
     ax[1].set_xlabel('Revenue')
     ax[1].set_xticklabels([])
@@ -67,7 +67,7 @@ def statistical_analysis(df, col: str):
 def preprocessing(df):
     # You should preprocess your data in this function and
     # make use of quick features such as 'describe', 'head/tail' and 'corr'.
-    df = df.loc[:,['company_size', 'revenue', 'seniority_level']]
+    df = df.loc[:,['company_size','revenue','seniority_level']]
 
     def clean_revenue_data(val):
         if pd.isna(val):
@@ -90,7 +90,7 @@ def preprocessing(df):
 
     df['revenue'] = df['revenue'].apply(clean_revenue_data)
 
-    df['company_size'] = pd.to_numeric(df['company_size'].astype(str).str.replace(',', ''),errors = 'coerce')
+    df['company_size'] = pd.to_numeric(df['company_size'].astype(str).str.replace(',',''),errors ='coerce')
 
     df = df.dropna()
     
