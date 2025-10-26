@@ -92,7 +92,6 @@ def preprocessing(df):
                                        str.replace(',', ''),
                                        errors='coerce')
     df = df.dropna()
-    
     df.head()
     df.describe()
     df.corr(numeric_only=True)
