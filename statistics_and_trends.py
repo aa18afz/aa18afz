@@ -72,8 +72,7 @@ def preprocessing(df):
     def clean_revenue_data(val):
         if pd.isna(val):
             return None
-        s = str(val).replace('€', '').
-                     replace(',', '').strip()  # remove € and commas
+        s = str(val).replace('€', '').replace(',', '').strip()
         multiplier = 1
         if s.upper().endswith('B'):
             multiplier = 1e9
