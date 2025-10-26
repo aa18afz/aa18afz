@@ -22,8 +22,8 @@ def plot_relational_plot(df):
     ax.set_title('Comapny Size vs Revenue')
     ax.set_xlabel('Company Size')
     ax.set_ylabel('Revenue (£Billions)')
-    ax.set_xscale('log') # As data range is too spread apart
-    ax.set_yscale('log') # As data range is too spread apart
+    ax.set_xscale('log')  # As data range is too spread apart
+    ax.set_yscale('log')  # As data range is too spread apart
     plt.savefig('relational_plot.png')
     return
 
@@ -50,7 +50,7 @@ def plot_statistical_plot(df):
     ax[1].set_ylabel('€Billion')
     ax[1].set_xlabel('Revenue')
     ax[1].set_xticklabels([])
-    ax[1].set_yscale('log') # As data range is too spread apart
+    ax[1].set_yscale('log')  # As data range is too spread apart
 
     fig.subplots_adjust(wspace=0.5, hspace=0.5)
     plt.savefig('statistical_plot.png')
@@ -73,8 +73,8 @@ def preprocessing(df):
     # of 13 columns in the data file for the analysis 
 
     def clean_revenue_data(val):
-    # Due to data in columns being inconsistent, we clean the data
-        if pd.isna(val): # if there is NA data
+     # Due to data in columns being inconsistent, we clean the data
+        if pd.isna(val):  # if there is NA data
             return None  # we dont return anything in this if condition
         s = str(val).replace('€', '').replace(',', '').strip()
         # As data is written with currency symbols, notations and
@@ -82,15 +82,15 @@ def preprocessing(df):
         # from str to float
         multiplier = 1
         if s.upper().endswith('B'):
-            multiplier = 1e9 # Converting 'B' to billion
+            multiplier = 1e9  # Converting 'B' to billion
             s = s[:-1]
         elif s.upper().endswith('M'):
-            multiplier = 1e6 # Converting 'M' to million
+            multiplier = 1e6  # Converting 'M' to million
             s = s[:-1]
         try:
             return float(s) * multiplier 
-        except ValueError: # If data is missing or in completely in
-            return None    # invalid format, we dont return anything
+        except ValueError:  # If data is missing or in completely in
+            return None     # invalid format, we dont return anything
 
     df['revenue'] = df['revenue'].apply(clean_revenue_data)
     # applying the cleaning definition created to the column
@@ -126,7 +126,7 @@ def writing(moments, col):
 def main():
     df = pd.read_csv('data.csv')
     df = preprocessing(df)
-    col = 'revenue' 
+    col = 'revenue'
     # Revenue of different data science companies
     plot_relational_plot(df)
     plot_statistical_plot(df)
